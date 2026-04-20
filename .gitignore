@@ -1,0 +1,52 @@
+# ─────────────────────────────────────────────────────────────────
+# .gitignore  —  Ficheros y directorios excluidos del repositorio Git
+# ─────────────────────────────────────────────────────────────────
+
+# ── Capturas y sesiones (datos sensibles) ────────────────────────
+# Las capturas PCAP y CSV contienen tráfico real: no se suben a Git
+sessions/*/
+!sessions/.gitkeep
+
+# ── Logs del sistema ─────────────────────────────────────────────
+logs/*.log
+!logs/.gitkeep
+
+# ── Python ───────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# ── Entornos virtuales ───────────────────────────────────────────
+venv/
+env/
+.venv/
+.env/
+
+# ── IDEs y editores ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ── Ficheros temporales de airodump-ng ───────────────────────────
+*.cap
+*.pcap
+*.csv
+*.kismet.csv
+*.kismet.netxml
+*.log.csv
+
+# ── Informes generados ───────────────────────────────────────────
+# Los informes se regeneran desde los datos de sesión
+report.json
+report.html
+networks.csv

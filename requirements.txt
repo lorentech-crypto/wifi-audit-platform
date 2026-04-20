@@ -1,0 +1,35 @@
+# ─────────────────────────────────────────────────────────────────
+# requirements.txt  —  Dependencias Python del proyecto
+# Plataforma de auditoría Wi-Fi sobre Raspberry Pi 4
+#
+# Instalación:
+#   pip install -r requirements.txt
+#
+# Nota: requiere Kali Linux o Raspberry Pi OS con los paquetes
+#       de sistema aircrack-ng y tshark instalados previamente:
+#   sudo apt-get install aircrack-ng tshark
+# ─────────────────────────────────────────────────────────────────
+
+# Construcción y análisis de paquetes de red a bajo nivel
+scapy==2.5.0
+
+# Comunicación con el puerto serie (ESP32 ↔ Raspberry Pi)
+pyserial==3.5
+
+# Interfaz orientada a objetos sobre TShark para captura de tráfico
+pyshark==0.6
+
+# Librería de terminal enriquecido: colores, tablas, barras de progreso
+rich==13.7.0
+
+# Operaciones matemáticas avanzadas (arrays, estadística)
+numpy==1.26.4
+
+# Manipulación y análisis de datos estructurados (CSV, JSON)
+pandas==2.2.1
+
+# Generación de gráficas para informes HTML
+matplotlib==3.8.3
+
+# Servidor web ligero para la interfaz de control (trabajo futuro)
+flask==3.0.2
