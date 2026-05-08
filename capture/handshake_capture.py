@@ -91,6 +91,7 @@ class HandshakeCapture:
             str: ruta del prefijo de ficheros de captura generados.
         """
         # Comprobamos si ya hay una captura activa para este BSSID
+        # (bug detectado en pruebas: sin esta guarda se lanzaban procesos duplicados)
         if bssid in self.active_captures:
             log.warning(f"Ya hay una captura activa para {bssid}. Ignorando.")
             return None
