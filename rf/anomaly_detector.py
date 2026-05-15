@@ -210,3 +210,5 @@ class AnomalyDetector:
 # Varianza típica observada: 8-12 dBm²
 # Con k=2.0: umbral = 2 * sqrt(10) ≈ 6.3 dBm
 # ─────────────────────────────────────────────────────────────────
+
+# Nota: umbral k=2.0 validado en pruebas de laboratorio (varianza típica 8-12 dBm²)
