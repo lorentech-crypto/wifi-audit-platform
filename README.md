@@ -200,3 +200,21 @@ Pruebas realizadas sobre Kali Linux 2024.1 / Raspberry Pi 4 Model B:
 | RAM utilizada | 1,0–1,5 GB |
 | Temperatura Raspberry Pi 4 | 55–60 °C |
 | Sesión máxima sin bloqueo | > 4 horas |
+
+---
+
+## 🔬 Resultados obtenidos en laboratorio
+
+Pruebas realizadas en entorno controlado / Raspberry Pi 4 Model B:
+
+| Parámetro | Resultado |
+|---|---|
+| Redes detectadas simultáneamente | 34 |
+| Tiempo medio de escaneo | ~12 s |
+| Sensibilidad mínima estable | −87 dBm |
+| Handshake WPA2 capturado | 100 % redes de prueba |
+| WPA3-SAE resistente a deauth | Confirmado |
+| CPU media en operación | 35–45 % |
+| RAM utilizada | 1,0–1,5 GB |
+| Temperatura Raspberry Pi 4 | 55–60 °C |
+| Sesión máxima sin bloqueo | > 4 horas |
