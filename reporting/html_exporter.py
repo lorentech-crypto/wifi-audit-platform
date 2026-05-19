@@ -196,7 +196,7 @@ def _html_footer():
 <hr>
 <p style="color:#888; font-size:0.85em;">
   Informe generado por la plataforma de auditoría Wi-Fi.
-  Uso exclusivamente ético y autorizado.
+  ⚠️ Uso exclusivamente ético y autorizado sobre redes propias o con permiso expreso.
 </p>
 </body>
 </html>"""
