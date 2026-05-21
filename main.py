@@ -2,7 +2,7 @@
 # main.py  —  Punto de entrada de la plataforma de auditoría Wi-Fi
 #
 # Autor:      [Nombre del Autor]
-# Versión:    1.0.0
+# Versión:    1.0.0  — versión de entrega TFG
 # Fecha:      2024
 # Licencia:   MIT (solo para uso ético y autorizado)
 #
