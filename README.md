@@ -165,6 +165,12 @@ Consulte el archivo `LICENSE` para más detalles.
 
 ---
 
+## ✅ Estado del proyecto
+
+Desarrollo completado. Listo para entrega del TFG (22 mayo 2026).
+
+---
+
 ## 🔬 Resultados obtenidos en laboratorio
 
 Pruebas realizadas en entorno controlado (Kali Linux 2024.1):
@@ -185,6 +191,12 @@ valida experimentalmente las mejoras de seguridad introducidas por SAE.
 
 ---
 
+## ✅ Estado del proyecto
+
+Desarrollo completado. Listo para entrega del TFG (22 mayo 2026).
+
+---
+
 ## 🔬 Resultados obtenidos en laboratorio
 
 Pruebas realizadas sobre Kali Linux 2024.1 / Raspberry Pi 4 Model B:
@@ -200,6 +212,12 @@ Pruebas realizadas sobre Kali Linux 2024.1 / Raspberry Pi 4 Model B:
 | RAM utilizada | 1,0–1,5 GB |
 | Temperatura Raspberry Pi 4 | 55–60 °C |
 | Sesión máxima sin bloqueo | > 4 horas |
+
+---
+
+## ✅ Estado del proyecto
+
+Desarrollo completado. Listo para entrega del TFG (22 mayo 2026).
 
 ---
 
