@@ -26,7 +26,6 @@
 import subprocess
 
 # csv: módulo estándar para leer ficheros CSV (salida de airodump-ng)
-import csv
 
 # time: para las pausas entre ciclos de lectura del CSV
 import time
@@ -39,6 +38,7 @@ import os
 import threading
 
 # Importamos el logger del sistema para mensajes estructurados
+from scanner.parser import parse_airodump_csv
 from utils.logger import get_logger
 
 # Logger específico para el módulo Scanner
@@ -223,104 +223,44 @@ class WiFiScanner:
 
     def _parse_csv(self, csv_file):
         """
-        Lee el CSV de airodump-ng y extrae los datos de cada red.
+        Delega el parseo del CSV al módulo scanner/parser.py.
 
-        El CSV de airodump-ng tiene un formato específico con dos
-        secciones separadas por una línea en blanco:
-          1. Puntos de acceso (AP): una fila por red con 15+ columnas
-          2. Clientes asociados: una fila por cliente
-
-        Solo procesamos la primera sección (APs).
+        Usa parse_airodump_csv() para extraer las redes detectadas
+        y emite el evento 'network_detected' por cada BSSID nuevo.
 
         Parámetros:
-            csv_file (str): ruta al fichero CSV a procesar.
+            csv_file (str): ruta al fichero CSV generado por airodump-ng.
         """
-        try:
-            # Abrimos el CSV con manejo de errores de codificación.
-            # airodump-ng puede generar caracteres no UTF-8 en algunos SSIDs.
-            with open(csv_file, 'r', encoding='utf-8', errors='ignore') as f:
+        # Delegamos el parseo completo al módulo especializado parser.py.
+        # Centralizar el parseo ahí facilita el mantenimiento y las pruebas.
+        networks = parse_airodump_csv(csv_file)
 
-                # csv.reader parsea automáticamente las comas y las comillas
-                reader = csv.reader(f)
+        # Procesamos cada red retornada por el parser
+        for network in networks:
+            bssid = network.get('bssid', '')
 
-                # Procesamos fila a fila
-                for row in reader:
+            # Solo actuamos si el BSSID es válido
+            if not bssid:
+                continue
 
-                    # ── Filtro 1: filas con suficientes columnas ────
-                    # Las filas de AP tienen al menos 15 columnas.
-                    # Las filas de cabecera, vacías o de cliente son más cortas.
-                    if len(row) < 15:
-                        continue
+            if bssid not in self.known_networks:
+                # Red nueva: la registramos y emitimos el evento
+                self.known_networks[bssid] = network
 
-                    # ── Filtro 2: validar que es un BSSID (MAC) ─────
-                    # La columna 0 contiene la MAC del AP (p.ej. AA:BB:CC:DD:EE:FF)
-                    # Si no contiene ':', no es un BSSID válido.
-                    bssid = row[0].strip()
-                    if ':' not in bssid:
-                        continue
+                # El EventBus distribuirá este evento a todos los módulos
+                # suscritos: RFAnalyzer, ReportGenerator, ESP32Bridge
+                self.event_bus.emit('network_detected', network)
 
-                    # ── Extraer campos del CSV ──────────────────────
-                    # La estructura del CSV de airodump-ng es:
-                    # Col 0:  BSSID
-                    # Col 1:  First time seen
-                    # Col 2:  Last time seen
-                    # Col 3:  Channel
-                    # Col 4:  Speed
-                    # Col 5:  Privacy (tipo de cifrado)
-                    # Col 6:  Cipher
-                    # Col 7:  Authentication
-                    # Col 8:  Power (RSSI en dBm)
-                    # Col 9:  # beacons
-                    # Col 10: # IV
-                    # Col 11: LAN IP
-                    # Col 12: ID-length
-                    # Col 13: ESSID (SSID)
-                    # Col 14: Key
-
-                    # Construimos el diccionario de datos de la red
-                    network = {
-                        'bssid':      bssid,
-                        'channel':    row[3].strip(),    # Canal Wi-Fi
-                        'power':      row[8].strip(),    # RSSI en dBm (negativo)
-                        'encryption': row[5].strip(),    # WPA2, WPA, WEP, OPN...
-                        'cipher':     row[6].strip(),    # CCMP, TKIP, WEP...
-                        'ssid':       row[13].strip(),   # Nombre de la red
-                        'beacons':    row[9].strip(),    # Número de beacons
-                    }
-
-                    # ── Emitir evento solo si la red es nueva ───────
-                    # Comparamos con el diccionario de redes conocidas
-                    if bssid not in self.known_networks:
-                        # Primera vez que vemos esta red: la registramos
-                        self.known_networks[bssid] = network
-
-                        # Emitimos el evento 'network_detected' con los datos.
-                        # Todos los módulos suscritos (RFAnalyzer, Reporter,
-                        # ESP32Bridge) reaccionarán automáticamente.
-                        self.event_bus.emit('network_detected', network)
-
-                        log.info(
-                            f"Red detectada: SSID='{network['ssid']}' "
-                            f"BSSID={bssid} "
-                            f"CH={network['channel']} "
-                            f"RSSI={network['power']} dBm "
-                            f"ENC={network['encryption']}"
-                        )
-
-                    else:
-                        # Red ya conocida: actualizamos solo el RSSI
-                        # (puede variar entre ciclos de escaneo)
-                        self.known_networks[bssid]['power'] = network['power']
-
-        except PermissionError:
-            # El fichero está siendo escrito por airodump-ng al mismo tiempo
-            # Es normal y temporal: simplemente esperamos al siguiente ciclo
-            log.debug(f"CSV bloqueado por airodump-ng, reintentando en {self.scan_interval}s")
-
-        except Exception as e:
-            # Cualquier otro error: lo registramos pero no interrumpimos
-            log.error(f"Error parseando CSV: {e}")
-
+                log.info(
+                    f"Red detectada: SSID='{network.get('ssid', '?')}' "
+                    f"BSSID={bssid} CH={network.get('channel', '?')} "
+                    f"RSSI={network.get('power', '?')} dBm "
+                    f"ENC={network.get('encryption', '?')}"
+                )
+            else:
+                # Red ya conocida: solo actualizamos el RSSI
+                # (puede variar entre ciclos de escaneo)
+                self.known_networks[bssid]['power'] = network.get('power', '')
     def _stop_airodump(self):
         """Detiene el proceso de airodump-ng de forma limpia."""
         if hasattr(self, 'airodump_process') and self.airodump_process:

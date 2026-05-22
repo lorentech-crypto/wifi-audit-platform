@@ -19,7 +19,6 @@
 import json
 
 # csv: para exportación en formato CSV (tablas)
-import csv
 
 # os: para crear directorios y rutas de ficheros
 import os
@@ -165,26 +164,16 @@ class ReportGenerator:
             log.error(f"Error generando JSON: {e}")
 
     def _export_csv(self, output_dir):
-        """Exporta la lista de redes detectadas en formato CSV."""
+        """Exporta redes, handshakes y anomalías a ficheros CSV separados."""
         try:
-            filepath = os.path.join(output_dir, 'networks.csv')
-
-            # Definimos las columnas del CSV
-            fieldnames = ['timestamp', 'ssid', 'bssid', 'channel',
-                          'power', 'encryption', 'cipher']
-
-            with open(filepath, 'w', newline='', encoding='utf-8') as f:
-                # DictWriter escribe diccionarios como filas de CSV
-                writer = csv.DictWriter(f, fieldnames=fieldnames,
-                                        extrasaction='ignore')
-                writer.writeheader()             # Escribe la fila de cabecera
-                writer.writerows(self.networks)  # Escribe una fila por red
-
-            log.info(f"Informe CSV generado: {filepath}")
-
+            # Delegamos la exportación al módulo csv_exporter.py:
+            # genera networks.csv, handshakes.csv y rf_anomalies.csv
+            export_networks_csv(self.networks, output_dir)
+            export_handshakes_csv(self.handshakes, output_dir)
+            export_anomalies_csv(self.rf_anomalies, output_dir)
+            log.info(f"Informes CSV generados en: {output_dir}")
         except Exception as e:
-            log.error(f"Error generando CSV: {e}")
-
+            log.error(f"Error generando CSVs: {e}")
     def _export_html(self, summary, output_dir):
         """Exporta el informe en formato HTML navegable."""
         try:

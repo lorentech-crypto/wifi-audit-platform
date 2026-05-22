@@ -31,11 +31,11 @@ from rf.statistics import (
     calculate_variance,
     calculate_std_dev,
     calculate_channel_occupancy,
-    is_anomaly
 )
 
 # Importamos el detector de anomalías
 from rf.anomaly_detector import AnomalyDetector
+from rf.channel_monitor import ChannelMonitor
 
 # Importamos el logger del sistema
 from utils.logger import get_logger
@@ -78,6 +78,9 @@ class RFAnalyzer:
         # Permite calcular métricas independientes para cada canal.
         # Los canales Wi-Fi van del 1 al 14 (2.4GHz) y del 36+ (5GHz).
         self.channel_data = {}
+
+        # Monitor de ocupación de canales Wi-Fi
+        self.channel_monitor = ChannelMonitor()
 
         # Instancia del detector de anomalías.
         # Analiza cada nuevo RSSI para detectar desviaciones anómalas.
@@ -123,6 +126,9 @@ class RFAnalyzer:
 
         # Extraemos el canal (puede ser vacío en algunos APs)
         channel = network.get('channel', '').strip()
+
+        # Registramos la red en el monitor de canales
+        self.channel_monitor.register_network(channel, rssi)
 
         # ── Actualización thread-safe de los datos acumulados ─────
         with self._lock:
