@@ -30,6 +30,7 @@ from datetime import datetime
 # Importamos los exportadores especializados
 from reporting.json_exporter import export_to_json
 from reporting.html_exporter import export_to_html
+from reporting.csv_exporter import export_networks_csv, export_handshakes_csv, export_anomalies_csv
 
 # Importamos el logger del sistema
 from utils.logger import get_logger

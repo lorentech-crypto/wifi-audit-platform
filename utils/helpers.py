@@ -50,7 +50,7 @@ def sanitize_ssid(ssid):
     Limpia un SSID para usarlo de forma segura en nombres de fichero.
 
     Elimina o reemplaza caracteres que no son válidos en nombres de
-    fichero del sistema de archivos (/, \, :, *, etc.).
+    fichero del sistema de archivos (/, barrabaja, :, *, etc.).
 
     Parámetros:
         ssid (str): nombre de red original.
