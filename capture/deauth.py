@@ -1,26 +1,10 @@
 # ─────────────────────────────────────────────────────────────────
 # capture/deauth.py  —  Tramas de desautenticación controladas
-#
-# Descripción:
-#   Implementa el envío de tramas de desautenticación 802.11 mediante
-#   aireplay-ng. Se usa para forzar la reautenticación de un cliente,
-#   facilitando la captura del handshake WPA/WPA2 sin esperar a que
-#   el cliente se desconecte y reconecte de forma espontánea.
-#
-#   ¿Por qué funciona esto?
-#   En WPA2, las tramas de gestión (como las de desautenticación) NO
-#   están autenticadas ni cifradas. Cualquiera puede enviar una trama
-#   de deauth falsificando la MAC del AP, y el cliente la aceptará.
-#   WPA3 corrige esto con IEEE 802.11w (Protected Management Frames).
-#
-#   ⚠️  AVISO LEGAL IMPORTANTE:
-#       El envío de tramas de desautenticación a redes ajenas está
-#       tipificado como delito de sabotaje informático en la mayoría
-#       de jurisdicciones. Usar ÚNICAMENTE sobre redes propias o con
-#       autorización expresa y por escrito del administrador.
+# AVISO LEGAL IMPORTANTE: El envío de tramas de desautenticación a redes ajenas está tipificado como delito de sabotaje informático en la mayoría de jurisdicciones. Usar ÚNICAMENTE sobre redes propias o con
+# autorización expresa y por escrito del administrador.
 # ─────────────────────────────────────────────────────────────────
-
 # subprocess: para ejecutar aireplay-ng
+
 import subprocess
 
 # time: para la pausa entre ráfagas de deauth
