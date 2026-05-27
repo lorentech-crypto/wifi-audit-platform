@@ -31,7 +31,7 @@ class SessionManager:
 
     Ejemplo de estructura de directorios generada:
         sessions/
-        └── 2024-05-15_14-30-22/
+        └── 2026-05-15_14-30-22/
             ├── scan-01.csv          ← salida de airodump-ng
             ├── handshake_AABBCC.cap ← captura PCAP
             └── report.json          ← informe de la sesión
