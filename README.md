@@ -1,4 +1,4 @@
-WiFi Audit Platform
+## WiFi Audit Platform
 
 **Plataforma portátil de auditoría automatizada de redes Wi-Fi sobre Raspberry Pi 4**
 
