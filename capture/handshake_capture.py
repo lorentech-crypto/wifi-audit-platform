@@ -1,25 +1,6 @@
 # ─────────────────────────────────────────────────────────────────
 # capture/handshake_capture.py  —  Captura de tráfico y detección de handshakes
-#
-# Descripción:
-#   Este módulo gestiona la captura focalizada de tráfico inalámbrico
-#   sobre un punto de acceso concreto (BSSID) y detecta automáticamente
-#   la presencia de handshakes WPA/WPA2 en el tráfico capturado.
-#
-#   ¿Qué es un handshake WPA/WPA2?
-#   Es el intercambio de 4 mensajes (EAPOL) que ocurre cuando un cliente
-#   se autentica en un punto de acceso WPA/WPA2. Capturarlo permite
-#   realizar análisis de la robustez de la contraseña de la red
-#   (mediante ataques de diccionario en entornos autorizados).
-#
-#   Flujo de trabajo:
-#     1. Se recibe un BSSID y canal objetivo
-#     2. Se lanza airodump-ng focalizado en ese AP
-#     3. Se monitoriza el fichero PCAP en busca de tramas EAPOL
-#     4. Al detectar un handshake completo, se emite 'handshake_detected'
-#
-#   ⚠️  AVISO LEGAL: usar EXCLUSIVAMENTE sobre redes propias o con
-#       autorización expresa por escrito del administrador de la red.
+# AVISO LEGAL: usar EXCLUSIVAMENTE sobre redes propias o con autorización expresa por escrito del administrador de la red.
 # ─────────────────────────────────────────────────────────────────
 
 # subprocess: para lanzar airodump-ng focalizado
