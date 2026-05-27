@@ -1,4 +1,4 @@
-# 📡 WiFi Audit Platform
+WiFi Audit Platform
 
 **Plataforma portátil de auditoría automatizada de redes Wi-Fi sobre Raspberry Pi 4**
 
@@ -12,7 +12,7 @@ Plataforma modular desarrollada en Python que automatiza el flujo de auditoría 
 
 ---
 
-## 🏗️ Arquitectura del sistema
+## Arquitectura del sistema
 
 ```
 wifi_audit_platform/
@@ -62,13 +62,13 @@ wifi_audit_platform/
 
 | Módulo | Función | Estado |
 |---|---|---|
-| `core/event_bus.py` | Bus de eventos publish/subscribe | ✅ Funcional |
-| `scanner/scanner.py` | Escaneo de redes con airodump-ng | ✅ Funcional |
-| `capture/handshake_capture.py` | Captura de handshakes WPA/WPA2 | ✅ Funcional |
-| `rf/rf_analyzer.py` | Análisis estadístico del espectro | ✅ Funcional |
-| `rf/anomaly_detector.py` | Detección de anomalías RF | ✅ Funcional |
-| `esp32/serial_bridge.py` | Comunicación serial con ESP32 | 🔬 Validado en Wokwi |
-| `reporting/report_generator.py` | Generación de informes | ✅ Funcional |
+| `core/event_bus.py` | Bus de eventos publish/subscribe 
+| `scanner/scanner.py` | Escaneo de redes con airodump-ng
+| `capture/handshake_capture.py` | Captura de handshakes WPA/WPA2
+| `rf/rf_analyzer.py` | Análisis estadístico del espectro
+| `rf/anomaly_detector.py` | Detección de anomalías RF
+| `esp32/serial_bridge.py` | Comunicación serial con ESP32
+| `reporting/report_generator.py` | Generación de informes
 
 ## Resultados obtenidos en laboratorio
 
@@ -88,7 +88,7 @@ Pruebas realizadas en entorno controlado (Kali Linux 2024.1):
 Nota: WPA3-SAE no permite captura de handshake equivalente, lo que
 valida experimentalmente las mejoras de seguridad introducidas por SAE.
 
-## 🔬 Resultados obtenidos en laboratorio
+## Resultados obtenidos en laboratorio
 
 Pruebas realizadas sobre Kali Linux 2024.1 / Raspberry Pi 4 Model B:
 
@@ -104,7 +104,7 @@ Pruebas realizadas sobre Kali Linux 2024.1 / Raspberry Pi 4 Model B:
 | Temperatura Raspberry Pi 4 | 55–60 °C |
 | Sesión máxima sin bloqueo | > 4 horas |
 
-## 🔬 Resultados obtenidos en laboratorio
+## Resultados obtenidos en laboratorio
 
 Pruebas realizadas en entorno controlado / Raspberry Pi 4 Model B:
 
