@@ -10,11 +10,8 @@ Plataforma modular desarrollada en Python que automatiza el flujo de auditoría 
 **Adaptador Wi-Fi:** Alfa AWUS036ACH (chipset RTL8812AU)  
 **Sistema operativo:** Kali Linux 2024.1
 
----
-
 ## Arquitectura del sistema
 
-```
 wifi_audit_platform/
 │
 ├── main.py                    # Punto de entrada — orquesta todos los módulos
@@ -58,6 +55,7 @@ wifi_audit_platform/
     ├── logger.py              # Sistema de registro de eventos con Rich
     ├── helpers.py             # Funciones auxiliares varias
     └── network_utils.py       # Utilidades de red
+
 ## Módulos principales
 
 | Módulo | Función | Estado |
