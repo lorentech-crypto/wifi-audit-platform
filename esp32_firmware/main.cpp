@@ -21,8 +21,7 @@
 //   Board: "ESP32 Dev Module"
 //
 // Nota:
-//   Este firmware fue validado en Wokwi (https://wokwi.com) al no
-//   disponer del hardware físico durante el desarrollo del TFG.
+//   Este firmware fue validado en Wokwi (https://wokwi.com) 
 // ─────────────────────────────────────────────────────────────────
 
 // Arduino.h: framework base para ESP32 con Arduino
