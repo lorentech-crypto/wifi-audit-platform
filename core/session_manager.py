@@ -53,7 +53,7 @@ class SessionManager:
         self.session_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
         # Ruta completa del directorio de la sesión actual
-        # Ejemplo: 'sessions/2024-05-15_14-30-22'
+        # Ejemplo: 'sessions/2026-05-15_14-30-22'
         self.session_dir = os.path.join(self.base_dir, self.session_name)
 
         # Creamos el directorio de la sesión al instanciar el manager
@@ -86,7 +86,7 @@ class SessionManager:
 
         Ejemplo:
             manager.get_session_path('scan')
-            → 'sessions/2024-05-15_14-30-22/scan'
+            → 'sessions/2026-05-15_14-30-22/scan'
         """
         # Construimos la ruta uniendo el directorio de sesión con el fichero
         return os.path.join(self.session_dir, filename)
@@ -96,7 +96,7 @@ class SessionManager:
         Retorna el nombre identificador de la sesión actual.
 
         Retorna:
-            str: nombre de la sesión (p.ej. '2024-05-15_14-30-22').
+            str: nombre de la sesión (p.ej. '2026-05-15_14-30-22').
         """
         return self.session_name
 
